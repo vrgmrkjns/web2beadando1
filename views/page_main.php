@@ -30,9 +30,6 @@
         <nav class="site-nav">
             <?php echo Menu::getMenu($viewData['selectedItems']); ?>
         </nav>
-        <aside>
-                <p>Phasellus wisi nulla...</p>
-        </aside>
         <section>
             <?php if($viewData['render']) include($viewData['render']); ?>
         </section>
@@ -47,7 +44,6 @@
               </script>
               . All Rights Reserved. &mdash; Designed with love by
               <a href="https://untree.co">Untree.co</a>
-              <!-- License information: https://untree.co/license/ -->
             </p>
             <div>
               Distributed by

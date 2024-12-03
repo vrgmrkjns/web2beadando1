@@ -18,15 +18,14 @@ Class Menu {
         $menu = '   <div class="container">
                         <div class="menu-bg-wrap">
                             <div class="site-navigation">
-                                <i class="fa-solid fa-ship"></i>
-                                <a href="index.html" class="logo m-0 float-start">Balatoni hajók</a>
+                                <a href="index.html" class="logo m-0 float-start"><i class="fa-solid fa-ship"></i> Balatoni hajók</a>
                                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">';
 
         foreach(self::$menu as $menuindex => $menuitem) {
-            if($menuitem[1] == "") {
-                $menu .= '<li><a href="'.SITE_ROOT.$menuindex.'" '.($menuindex==$sItems[0] ? "class='selected'" : "").'>'.$menuitem[0].'</a></li>';
-            } else if($menuitem[1] == $sItems[0]) {
-                $submenu .= '<li><a href="'.SITE_ROOT.$sItems[0].'/'.$menuindex.'" '.($menuindex==$sItems[1] ? "class='selected'" : "").'>'.$menuitem[0].'</a></li>';
+            if ($menuitem[1] == "") {
+                $menu .= '<li><a href="'.SITE_ROOT.$menuindex.'">'.$menuitem[0].'</a></li>';
+            } else if ($menuitem[1] == $sItems[0]) {
+                $submenu .= '<li><a href="'.SITE_ROOT.$sItems[0].'/'.$menuindex.'">'.$menuitem[0].'</a></li>';
             }
         }
 
