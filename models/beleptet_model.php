@@ -1,5 +1,4 @@
 <?php
-
 class Beleptet_Model
 {
 	public function get_data($vars)
@@ -7,7 +6,8 @@ class Beleptet_Model
 		$retData['eredmeny'] = "";
 		try {
 			$connection = Database::getConnection();
-			$sql = "select id, csaladi_nev, utonev, jogosultsag from felhasznalok where bejelentkezes='".$vars['login']."' and jelszo='".sha1($vars['password'])."'";
+			$sql = "SELECT * FROM felhasznalok WHERE fhn='".$vars['fhn']."' and jlsz='".sha1($vars['jlsz'])."'";
+			//$sql = "SELECT * FROM felhasznalok WHERE fhn='teszt' and jlsz='teszt'";
 			$stmt = $connection->query($sql);
 			$felhasznalo = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			switch(count($felhasznalo)) {
@@ -17,13 +17,10 @@ class Beleptet_Model
 					break;
 				case 1:
 					$retData['eredmény'] = "OK";
-					$retData['uzenet'] = "Kedves ".$felhasznalo[0]['csaladi_nev']." ".$felhasznalo[0]['utonev']."!<br><br>
-					                      Jó munkát kívánunk rendszerünkkel.<br><br>
-										  Az üzemeltetők";
+					$retData['uzenet'] = "Üdv, ".$felhasznalo[0]['fhn']."!";
 					$_SESSION['userid'] =  $felhasznalo[0]['id'];
-					$_SESSION['userlastname'] =  $felhasznalo[0]['csaladi_nev'];
-					$_SESSION['userfirstname'] =  $felhasznalo[0]['utonev'];
-					$_SESSION['userlevel'] = $felhasznalo[0]['jogosultsag'];
+					$_SESSION['fhnev'] =  $felhasznalo[0]['fhn'];
+					$_SESSION['userlevel'] = $felhasznalo[0]['priv'];
 					Menu::setMenu();
 					break;
 				default:
@@ -38,5 +35,4 @@ class Beleptet_Model
 		return $retData;
 	}
 }
-
 ?>

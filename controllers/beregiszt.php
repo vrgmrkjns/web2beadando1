@@ -1,14 +1,16 @@
 <?php
 
-class Kilepes_Controller
+class Beregiszt_Controller
 {
-	public $baseName = 'kilepes';
+	public $baseName = 'beregiszt';
 	public function main(array $vars)
 	{
-		$kilepesModel = new Kilepes_Model;
-		$retData = $kilepesModel->get_data(); 
+		$beregisztModel = new Beregiszt_Model;
+
+		$retData = $beregisztModel->register_user($vars);
+
 		$view = new View_Loader($this->baseName.'_main');
-		
+
 		foreach($retData as $name => $value)
 			$view->assign($name, $value);
 	}

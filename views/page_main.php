@@ -33,29 +33,7 @@
         <section>
             <?php if($viewData['render']) include($viewData['render']); ?>
         </section>
-        <div class="site-footer">
-      <div class="container">
-        <div class="row mt-5">
-          <div class="col-12 text-center">
-            <p>
-              Copyright &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              . All Rights Reserved. &mdash; Designed with love by
-              <a href="https://untree.co">Untree.co</a>
-            </p>
-            <div>
-              Distributed by
-              <a href="https://themewagon.com/" target="_blank">themewagon</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.container -->
-    </div>
-    <!-- /.site-footer -->
-
+        
     <!-- Preloader -->
     <div id="overlayer"></div>
     <div class="loader">

@@ -15,9 +15,24 @@
  */
 
 
-.nje-logo {
-  width: 50px;
+.belepes-div {
+  padding-right: 0;
+  width: 450px;
   height: auto;
+  margin: 200px auto 200px auto;
+  align-items: center;
+  padding: 30px;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.belepes-div label {
+  margin-top: 20px;
+  color: black;
+}
+
+.gomb-div {
+  text-align: center;
 }
 
 :root {

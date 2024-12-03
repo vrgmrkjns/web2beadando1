@@ -1,8 +1,8 @@
 <?php
 
-class Belepes_Controller
+class Regiszt_Controller
 {
-	public $baseName = 'belepes';
+	public $baseName = 'regiszt';
 	public function main(array $vars)
 	{
 		$view = new View_Loader($this->baseName."_main");
