@@ -14,6 +14,27 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+.form-select {
+  margin: auto !important;
+}
+
+ .mnb-div {
+  margin: auto;
+  align-items: center;
+  text-align: center;
+ }
+
+ .icon-link::after {
+  font-family: "Font Awesome 6 Free"; /* Font Awesome betűtípus */
+  content: "\f078"; /* Font Awesome Unicode karakter (pl. hajó) */
+  font-weight: 900; /* Szükséges lehet a megfelelő ikonhoz */
+  margin-right: 8px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.icon-link::after:hover {
+  color: white;
+}
 
 .belepes-div {
   padding-right: 0;
@@ -9260,16 +9281,6 @@ textarea.form-control-lg {
       .site-nav .site-navigation .site-menu .has-children > a {
         position: relative;
         padding-right: 20px; }
-        .site-nav .site-navigation .site-menu .has-children > a:before {
-          position: absolute;
-          content: "\e313";
-          font-size: 14px;
-          top: 50%;
-          right: 0;
-          -webkit-transform: translateY(-50%);
-          -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-          font-family: 'icomoon'; }
       .site-nav .site-navigation .site-menu .has-children .dropdown {
         visibility: hidden;
         opacity: 0;

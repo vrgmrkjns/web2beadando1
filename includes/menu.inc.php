@@ -1,6 +1,6 @@
 <?php
 
-Class Menu {
+class Menu {
     public static $menu = array();
 
     public static function setMenu() {
@@ -13,36 +13,43 @@ Class Menu {
     }
 
     public static function getMenu($sItems) {
-        $submenu = "";
-        
-        $menu = '   <div class="container">
-                        <div class="menu-bg-wrap">
-                            <div class="site-navigation">
-                                <a href="index.html" class="logo m-0 float-start"><i class="fa-solid fa-ship"></i> Balatoni hajók</a>
-                                <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">';
+        $menu = '<div class="container">
+                    <div class="menu-bg-wrap">
+                        <div class="site-navigation">
+                            <a href="index.html" class="logo m-0 float-start"><i class="fa-solid fa-ship"></i> Balatoni hajók</a>
+                            <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">';
 
         foreach(self::$menu as $menuindex => $menuitem) {
             if ($menuitem[1] == "") {
-                $menu .= '<li><a href="'.SITE_ROOT.$menuindex.'">'.$menuitem[0].'</a></li>';
-            } else if ($menuitem[1] == $sItems[0]) {
-                $submenu .= '<li><a href="'.SITE_ROOT.$sItems[0].'/'.$menuindex.'">'.$menuitem[0].'</a></li>';
+                $submenu = self::generateSubMenu($menuindex);
+                if ($submenu != "") {
+                    $menu .= '<li class="has-children"><a class="icon-link" href="'.SITE_ROOT.$menuindex.'">'.$menuitem[0].'</a>';
+                    $menu .= '<ul class="dropdown">'.$submenu.'</ul></li>';
+                } else {
+                    $menu .= '<li><a href="'.SITE_ROOT.$menuindex.'">'.$menuitem[0].'</a></li>';
+                }
             }
         }
 
-        $menu .= '</ul>';
-
-        if ($submenu != "") {
-            $menu .= '<ul class="dropdown">'.$submenu.'</ul>';
-        }
-
-        $menu .= '<a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none">
-                      <span></span>
-                  </a>
+        $menu .= '</ul>
+                    <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none">
+                        <span></span>
+                    </a>
                 </div>
               </div>
             </div>';
 
         return $menu;
+    }
+
+    private static function generateSubMenu($parent) {
+        $submenu = "";
+        foreach (self::$menu as $menuindex => $menuitem) {
+            if ($menuitem[1] == $parent) {
+                $submenu .= '<li><a href="'.SITE_ROOT.$menuindex.'">'.$menuitem[0].'</a></li>';
+            }
+        }
+        return $submenu;
     }
 }
 

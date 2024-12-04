@@ -22,6 +22,8 @@
         <link rel="stylesheet" href="css/aos.css" />
         <link rel="stylesheet" href="css/style.css" />
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <!-- jQuery az AJAX-hoz -->
+
         <title>
         DOGER1 - Web II - Előadás Beadandó
         </title>
