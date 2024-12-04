@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="css/style.css" />
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <!-- jQuery az AJAX-hoz -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <title>
         DOGER1 - Web II - Előadás Beadandó

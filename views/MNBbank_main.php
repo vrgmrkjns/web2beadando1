@@ -41,7 +41,10 @@ try {
 ?>
 
 <form id="exchangeRateForm">
-    <label for="date">Dátum:</label>
+    <label for="month">Hónap, havi árfolyamhoz:</label>
+    <input type="month" id="month" name="month" required><br><br>
+
+    <label for="date">Dátum napi árfolyamhoz:</label>
     <input type="date" id="date" name="date" required><br><br>
 
     <label for="currencyFrom">Forrás deviza:</label>
@@ -58,6 +61,8 @@ try {
         <?php endforeach; ?>
     </select><br><br>
 
+    <input type="hidden" name="currencyPair" id="currencyPair">
+
     <button type="submit" class="btn btn-primary">Lekérdezés</button>
 </form>
 <br>
@@ -65,6 +70,23 @@ try {
 <div id="result"></div>  <!-- Itt jelenik meg az árfolyam eredmény -->
 
 <script>
+function updateCurrencyPair() {
+    const from = document.getElementById('currencyFrom').value;
+    const to = document.getElementById('currencyTo').value;
+    const currencyPair = `${from}/${to}`;
+
+    // Beállítjuk a hidden input értékét
+    document.getElementById('currencyPair').value = currencyPair;
+}
+
+// Eseményfigyelők hozzáadása a select mezőkhöz
+document.getElementById('currencyFrom').addEventListener('change', updateCurrencyPair);
+document.getElementById('currencyTo').addEventListener('change', updateCurrencyPair);
+
+// Inicializálás, hogy már a kezdő értékekkel beállítsuk a hidden input értékét
+updateCurrencyPair();
+
+
 // AJAX használata a form elküldésére és az árfolyam megjelenítésére
 document.getElementById('exchangeRateForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Megakadályozza az alapértelmezett form küldést
@@ -90,5 +112,86 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
         console.error('Hiba történt:', error);
     });
 });
+
+//hónap
+document.getElementById('exchangeRateForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Megakadályozza az alapértelmezett form elküldést
+
+    const month = document.getElementById('month').value;
+    const currencyPair = document.getElementById('currencyPair').value;
+    console.log(currencyPair);
+
+    // Formátum: YYYY-MM
+    const [year, monthOnly] = month.split("-");
+
+    fetch('../models/mnb2_model.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `month=${monthOnly}&year=${year}&currencyPair=${currencyPair}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Táblázat feltöltése
+        const tableBody = document.querySelector('#rateTable tbody');
+        tableBody.innerHTML = '';
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            const dateCell = document.createElement('td');
+            const rateCell = document.createElement('td');
+            dateCell.textContent = item.date;
+            rateCell.textContent = item.rate.toFixed(2);
+            row.appendChild(dateCell);
+            row.appendChild(rateCell);
+            tableBody.appendChild(row);
+        });
+
+        // Grafikon frissítése
+        const labels = data.map(item => item.date);
+        const rates = data.map(item => item.rate);
+
+        const ctx = document.getElementById('exchangeRateChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Árfolyam',
+                    data: rates,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Hiba történt:', error);
+    });
+});
+
 </script>
+<br>
+<br>
+<br>
+    <table id="rateTable" border="1">
+        <thead>
+            <tr>
+                <th>Dátum</th>
+                <th>Árfolyam</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <canvas id="exchangeRateChart"></canvas>
+
+
 </div>
