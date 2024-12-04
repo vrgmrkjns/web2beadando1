@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 07:35 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2024. Dec 04. 20:31
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web2php`
+-- Adatbázis: `web2php`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `felhasznalok`
+-- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
 CREATE TABLE `felhasznalok` (
@@ -36,7 +36,7 @@ CREATE TABLE `felhasznalok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- Dumping data for table `felhasznalok`
+-- A tábla adatainak kiíratása `felhasznalok`
 --
 
 INSERT INTO `felhasznalok` (`id`, `fhn`, `email`, `jlsz`, `priv`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `felhasznalok` (`id`, `fhn`, `email`, `jlsz`, `priv`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hajo`
+-- Tábla szerkezet ehhez a táblához `hajo`
 --
 
 CREATE TABLE `hajo` (
@@ -57,7 +57,7 @@ CREATE TABLE `hajo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
--- Dumping data for table `hajo`
+-- A tábla adatainak kiíratása `hajo`
 --
 
 INSERT INTO `hajo` (`az`, `nev`, `tipus`, `tulaz`, `uzemel`) VALUES
@@ -158,7 +158,7 @@ INSERT INTO `hajo` (`az`, `nev`, `tipus`, `tulaz`, `uzemel`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Tábla szerkezet ehhez a táblához `menu`
 --
 
 CREATE TABLE `menu` (
@@ -170,14 +170,15 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- Dumping data for table `menu`
+-- A tábla adatainak kiíratása `menu`
 --
 
 INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
-('', 'Fő oldal', '', '111', 10),
 ('belepes', 'Bejelentkezés', '', '100', 98),
 ('hajok', 'Hajók', '', '111', 20),
 ('kilepes', 'Kilépés', '', '011', 99),
+('mnbbank', 'SOAP-MNB', '', '011', 44),
+('nyitolap', 'Fő oldal', '', '111', 10),
 ('osszes', 'Összes hajó', 'hajok', '111', 21),
 ('regiszt', 'Regisztráció', '', '100', 99),
 ('tulajdonosok', 'Tulajdonosok', '', '111', 77);
@@ -185,7 +186,7 @@ INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tort`
+-- Tábla szerkezet ehhez a táblához `tort`
 --
 
 CREATE TABLE `tort` (
@@ -194,7 +195,7 @@ CREATE TABLE `tort` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
--- Dumping data for table `tort`
+-- A tábla adatainak kiíratása `tort`
 --
 
 INSERT INTO `tort` (`hajoaz`, `nev`) VALUES
@@ -234,7 +235,7 @@ INSERT INTO `tort` (`hajoaz`, `nev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tulajdonos`
+-- Tábla szerkezet ehhez a táblához `tulajdonos`
 --
 
 CREATE TABLE `tulajdonos` (
@@ -244,7 +245,7 @@ CREATE TABLE `tulajdonos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
--- Dumping data for table `tulajdonos`
+-- A tábla adatainak kiíratása `tulajdonos`
 --
 
 INSERT INTO `tulajdonos` (`az`, `nev`, `varos`) VALUES
@@ -266,39 +267,39 @@ INSERT INTO `tulajdonos` (`az`, `nev`, `varos`) VALUES
 (16, 'Magyar Honvédség Üdülője', 'Balatonkenese');
 
 --
--- Indexes for dumped tables
+-- Indexek a kiírt táblákhoz
 --
 
 --
--- Indexes for table `felhasznalok`
+-- A tábla indexei `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hajo`
+-- A tábla indexei `hajo`
 --
 ALTER TABLE `hajo`
   ADD PRIMARY KEY (`az`);
 
 --
--- Indexes for table `menu`
+-- A tábla indexei `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`url`);
 
 --
--- Indexes for table `tulajdonos`
+-- A tábla indexei `tulajdonos`
 --
 ALTER TABLE `tulajdonos`
   ADD PRIMARY KEY (`az`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- A kiírt táblák AUTO_INCREMENT értéke
 --
 
 --
--- AUTO_INCREMENT for table `felhasznalok`
+-- AUTO_INCREMENT a táblához `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
