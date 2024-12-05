@@ -73,7 +73,7 @@ try {
 function updateCurrencyPair() {
     const from = document.getElementById('currencyFrom').value;
     const to = document.getElementById('currencyTo').value;
-    const currencyPair = `${from}/${to}`;
+    const currencyPair = `${from},${to}`;
 
     // Beállítjuk a hidden input értékét
     document.getElementById('currencyPair').value = currencyPair;
@@ -124,6 +124,8 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
     // Formátum: YYYY-MM
     const [year, monthOnly] = month.split("-");
 
+    let chart;
+
     fetch('../models/mnb2_model.php', {
         method: 'POST',
         headers: {
@@ -133,6 +135,13 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
     })
     .then(response => response.json())
     .then(data => {
+        console.log('Kapott adat:', data);
+        if (data.error) {
+            alert(data.error); // Hibák megjelenítése a felhasználónak
+            return;
+        }
+
+
         // Táblázat feltöltése
         const tableBody = document.querySelector('#rateTable tbody');
         tableBody.innerHTML = '';
@@ -181,6 +190,7 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
 <br>
 <br>
 <br>
+<canvas id="exchangeRateChart" style="width: 700px; height: 200px"></canvas>
     <table id="rateTable" border="1">
         <thead>
             <tr>
@@ -191,7 +201,4 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
         <tbody>
         </tbody>
     </table>
-    <canvas id="exchangeRateChart"></canvas>
-
-
 </div>

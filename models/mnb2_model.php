@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'currencyNames' => $currencyPair
             ]);
 
+
             $xmlResult = simplexml_load_string($response->GetExchangeRatesResult);
+
 
             // Adatok feldolgozása
             $rates = [];
@@ -33,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // JSON válasz visszaadása a grafikonhoz
             echo json_encode($rates);
         } catch (SoapFault $e) {
+            error_log("SOAP hiba: " . $e->getMessage()); // Hiba naplózása
             echo "Hiba történt a SOAP hívás során: " . $e->getMessage();
         }
     }
