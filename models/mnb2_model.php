@@ -27,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $rates = [];
             foreach ($xmlResult->Day as $day) {
                 $rates[] = [
-                    'date' => (string)$day->Date,
+                    'date' => (string)$day['date'],
                     'rate' => (float)$day->Rate
                 ];
             }
 
             // JSON válasz visszaadása a grafikonhoz
-            echo json_encode($rates);
+            echo json_encode(array_reverse($rates));
         } catch (SoapFault $e) {
             error_log("SOAP hiba: " . $e->getMessage()); // Hiba naplózása
             echo "Hiba történt a SOAP hívás során: " . $e->getMessage();

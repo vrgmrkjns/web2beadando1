@@ -168,7 +168,7 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
                 datasets: [{
                     label: 'Árfolyam',
                     data: rates,
-                    borderColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgb(3, 255, 217)',
                     tension: 0.1
                 }]
             },
@@ -191,11 +191,13 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
 <br>
 <br>
 <canvas id="exchangeRateChart" style="width: 700px; height: 200px"></canvas>
-    <table id="rateTable" border="1">
+<br>
+<br>
+    <table style="width: 300px; margin: auto;" class="table table-striped" id="rateTable" border="1">
         <thead>
             <tr>
-                <th>Dátum</th>
-                <th>Árfolyam</th>
+                <th class="col">Dátum</th>
+                <th class="col">Árfolyam</th>
             </tr>
         </thead>
         <tbody>
