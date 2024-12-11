@@ -1,8 +1,8 @@
 <?php
 
-class MNBbank_Controller
+class mnbbank_Controller
 {
-	public $baseName = 'MNBbank'; 
+	public $baseName = 'mnbbank'; 
 	public function main(array $vars)
 	{
 		$view = new View_Loader($this->baseName.'_main');

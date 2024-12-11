@@ -114,6 +114,8 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
 });
 
 //hónap
+let chart;
+
 document.getElementById('exchangeRateForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Megakadályozza az alapértelmezett form elküldést
 
@@ -124,7 +126,6 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
     // Formátum: YYYY-MM
     const [year, monthOnly] = month.split("-");
 
-    let chart;
 
     fetch('../models/mnb2_model.php', {
         method: 'POST',
@@ -161,7 +162,12 @@ document.getElementById('exchangeRateForm').addEventListener('submit', function(
         const rates = data.map(item => item.rate);
 
         const ctx = document.getElementById('exchangeRateChart').getContext('2d');
-        const chart = new Chart(ctx, {
+
+        if (chart) {
+            chart.destroy();
+        }
+
+        chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
