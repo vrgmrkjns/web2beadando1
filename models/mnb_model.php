@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Az árfolyam megjelenítése
             if (isset($xmlResult->Day->Rate)) {
-                echo "<h4>Az árfolyam $currencyPair $date dátumra: " . $xmlResult->Day->Rate . " HUF</h4>";
+                echo "<h4>Az árfolyam $currencyPair $date dátumra: " . $xmlResult->Day->Rate ."</h4>";
             } else {
                 echo "<h4>Nincs elérhető adat a megadott dátumra és devizapárra.</h4>";
             }
