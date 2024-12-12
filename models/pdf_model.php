@@ -9,7 +9,7 @@ $uzemel = isset($_POST['uzemel']) ? $_POST['uzemel'] : '';
 
 // SQL lekérdezés kezdete
 $sql = "SELECT hajo.az, hajo.nev AS hajnev, hajo.tipus, tulajdonos.nev AS tulnev, 
-        CASE WHEN hajo.uzemel = 1 THEN 'Igen' 
+        CASE WHEN hajo.uzemel = -1 THEN 'Igen' 
              WHEN hajo.uzemel = 0 THEN 'Nem' 
              ELSE 'Ismeretlen' END AS uzemel,
         GROUP_CONCAT(tort.nev ORDER BY tort.nev SEPARATOR ', ') AS tortnev
